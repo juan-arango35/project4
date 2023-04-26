@@ -1,52 +1,106 @@
-import {View, Text} from 'react-native';
-import React from 'react';
-import {StyleSheet} from 'react-native';
-import EstilosAdicionales from './components/EstilosAdicionales';
+import { View, Text } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 
-export default function App() {
+const App = () => {
+
+  const [contador, setContador] = useState(0); 
+  
+  const reduceNumero=()=> {
+    setContador(contador-1); 
+  }; 
+
+  const addNumero=()=> {
+    setContador(contador+1)
+  }
+  
+
   return (
-    <View style={styles.principal}>
-      <View style={styles.container}>
-        <Text style={styles.contenedortext}>dentro de la primera caja </Text>
-      </View>
-      <EstilosAdicionales />
+    <View style={styles.container} >
 
-      <View style={styles.container2}>
-        <Text style={styles.contendortexto2}>dentro de la segunda caja</Text>
+      <View style={styles.subcontainer}>
+        <TouchableOpacity onPress={()=>reduceNumero()}
+          style={styles.boton}
+        
+        >
+          <Text style={styles.textcolor} > - </Text>
+
+        </TouchableOpacity>
+
+        <View  style={styles.counterContainer}>
+
+        <Text style={styles.counter} > {contador} </Text>
+
+
+        </View>
+
+        <TouchableOpacity onPress={()=>addNumero()}
+          style={styles.boton}
+        
+        >
+          <Text style={styles.textcolor} > + </Text>
+
+        </TouchableOpacity>
+
       </View>
+      
     </View>
-  );
+  )
 }
 
-const styles = StyleSheet.create({
-  principal: {
-    flex: 1,
-    width: '100%',
-
-    backgroundColor: 'green',
-  },
+const styles=StyleSheet.create ({
 
   container: {
     flex: 1,
-    backgroundColor: 'red',
-    height: 45,
-    width: '100%',
+    backgroundColor: "gray",
+    justifyContent: "center"
   },
 
-  contenedor: {
-    color: 'red',
+  subcontainer: {
+    height: 50,
+    width: "100%",
+    padding: 5, 
+    flexDirection: "row"
+
   },
 
-  container2: {
+  boton: {
+
+  width: 50,
+  height: 50,  
+  justifyContent: "center",
+  alignItems: "center", 
+  backgroundColor: "blue"
+  }, 
+
+  textcolor:{
+
+    color: "white", 
+    fontSize: 35, 
+    fontWeight: 'bold',
+  }, 
+
+  counterContainer: {
+
     flex: 1,
-
-    backgroundColor: 'blue',
+    justifyContent: "center",
+    alignItems: "center"
   },
 
-  contenedortext: {
-    color: 'white',
-  },
-  contendortexto2: {
-    color: 'gray',
-  },
-});
+  counter: {
+
+    
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 30
+    
+
+
+  }
+
+  
+
+
+})
+
+export default App
